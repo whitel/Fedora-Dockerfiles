@@ -11,16 +11,19 @@ RUN adduser --create-home app
 USER app
  
 WORKDIR /home/app
-RUN git clone https://github.com/mozilla-services/syncserver \
--b single-threaded-dev-server
- 
+RUN mkdir -p /home/app/syncserver
+WORKDIR /home/app/syncserver
+
+RUN curl -L https://github.com/mozilla-services/syncserver/tarball/master |\
+    tar xzf - --strip-components=1
+
 WORKDIR /home/app/syncserver
 RUN make build
  
 EXPOSE 5000
  
-RUN sed -i -e s/DebugCaptureSender/StdOutSender/ syncserver/__init__.py
-RUN sed -i -e s/\#sqluri/sqluri/ syncserver.ini
+#RUN sed -i -e s/DebugCaptureSender/StdOutSender/ syncserver/__init__.py
+#RUN sed -i -e s/\#sqluri/sqluri/ syncserver.ini
  
 ENTRYPOINT ["/usr/bin/make", "serve"]
 
