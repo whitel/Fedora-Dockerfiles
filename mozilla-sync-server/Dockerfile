@@ -2,8 +2,10 @@ FROM fedora:20
 MAINTAINER "Langdon White" <langdon@redhat.com>
 
 RUN yum -y update; yum clean all
-RUN yum -y install git python-devel python-virtualenv gcc-c++ gcc; yum clean all
+#RUN yum -y install git python-devel python-virtualenv gcc-c++ gcc make which sqlite; yum clean all
+RUN yum -y install git python-devel python-virtualenv gcc-c++ gcc make; yum clean all
 RUN git clone https://github.com/mozilla-services/syncserver
+RUN yum -y install which sqlite
 RUN cd /syncserver && make build
 
 EXPOSE 5000
