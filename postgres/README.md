@@ -7,7 +7,7 @@ Fedora dockerfile for PostgreSQL
 
 Copy the sources down and do the build-
 
-    # docker build -rm -t username/postgresql . |& tee postgres_build.log
+    # docker build --rm -t username/postgresql . |& tee postgres_build.log
 
 2.	To run 
 
@@ -31,11 +31,8 @@ To find the IP address, get the container ID:
 
 Then get the IP addr:
 
-    # docker inspect 7a1e1a80e948 | grep -i ipaddress
+    # docker inspect --format '{{ .NetworkSettings.IPAddress }}' a0d14cc9830b
 
-Now connect to the database.  In this case, it's called 'dockerdb' and the
-username is 'dockeruser' with a password of 'password', which was set via the
-postgres_user.sh script.
+Now connect to the instance of PostgreSQL.  There is no default database at this time.
 
-    # psql -h 172.17.0.x -U dockeruser -d dockerdb
-
+    # psql -h 172.17.0.x -U postgres
