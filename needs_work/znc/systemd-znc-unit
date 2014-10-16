@@ -1,0 +1,10 @@
+[Unit]
+Description=ZNC IRC Service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run -rm -p 6000:6000 langdon/znc su - znc -c 'znc --foreground'
+
+[Install]
+WantedBy=local.target
