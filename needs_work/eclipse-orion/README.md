@@ -3,9 +3,9 @@ dockerfiles-eclipse-orion
 
 Fedora dockerfile for running an Eclipse Orion server (http://www.eclipse.org/orion/)
 
-Tested on Docker 0.8.0
+Tested on Docker 1.1.2
 
-Full Docker manualt can be fetched from http://docker.io
+Full Docker manual can be fetched from http://docker.io
 
 Installation
 ----
